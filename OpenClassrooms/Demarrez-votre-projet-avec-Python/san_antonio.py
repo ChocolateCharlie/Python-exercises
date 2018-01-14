@@ -23,15 +23,13 @@ def get_random_item_in(my_list):
     # get a random number
     item = my_list[0]
     # get a quote from a list
-    print(item)
-    return "program is over"
+    return item
 
 # Logic
 
-user_answer = input('Tapez [Entree] pour decouvrir une autre citation ou B pour quitter le programe.')
+user_answer = "A"
 # Show random quote
-if user_answer == "B":
-    pass
-else:
+while user_answer != "B":
     print(get_random_item_in(quotes))
+    user_answer = "B"
 
