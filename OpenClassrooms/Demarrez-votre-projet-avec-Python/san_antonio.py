@@ -18,5 +18,10 @@ characters = [
 ]
 
 # Logic
-print ("Hello, World !")
+
+# Show random quote
+if user_answer == "B":
+    pass
+else:
+    # show another quote
 
