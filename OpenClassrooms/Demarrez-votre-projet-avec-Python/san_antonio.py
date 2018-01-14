@@ -3,8 +3,8 @@
 
 # Data
 quotes = [
-        "Ecoutez-moi, Monsieur Shakespeare, nous avons beau etre ou ne pas etre, nous sommes !",
-        "On doit pouvoir choisir entre s'ecouter parler et se faire entendre."
+        "Ecoutez-moi, Monsieur Shakespeare, nous avons beau être ou ne pas être, nous sommes !",
+        "On doit pouvoir choisir entre s'écouter parler et se faire entendre."
 ]
 
 characters = [
@@ -13,7 +13,7 @@ characters = [
         "Betty Boop",
         "Calimero",
         "Casper",
-        "Le Chat Potte",
+        "Le Chat Potté",
         "Kirikou"
 ]
 
