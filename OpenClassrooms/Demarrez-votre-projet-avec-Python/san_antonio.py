@@ -30,6 +30,6 @@ def get_random_item_in(my_list):
 user_answer = "A"
 # Show random quote
 while user_answer != "B":
-    print(get_random_item_in(quotes))
+    print("{character} a dit : {quote}".format(character=get_random_item_in(characters), quote=get_random_item_in(quotes)))
     user_answer = "B"
 
