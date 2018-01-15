@@ -6,8 +6,6 @@ import json
 
 ##### DATA FUNCTIONS #####
 
-# Fetching, cleaning, get random
-
 # Return a list given a JSON file and key
 def read_values_from_json(path, key):
     values = []
