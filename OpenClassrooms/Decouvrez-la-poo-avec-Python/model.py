@@ -145,7 +145,7 @@ class BaseGraph:
         plt.xlabel(self.x_label)
         plt.ylabel(self.y_label)
         plt.title(self.title)
-        plt.grif(self.show_grid)
+        plt.grid(self.show_grid)
         plt.show()
 
     def xy_values(self, zones):
@@ -164,7 +164,7 @@ class AgreeablenessGraph(BaseGraph):
         self.y_label = "agreeableness"
 
     def xy_values(self, zones):
-        x_values = [zone.populatin_density() for zone in zones]
+        x_values = [zone.population_density() for zone in zones]
         y_values = [zone.average_agreeableness() for zone in zones]
         return x_values, y_values
 
@@ -181,8 +181,8 @@ def main():
         zone = Zone.find_zone_that_contains(position)
         zone.add_inhabitant(agent)
         
-        agreeableness_graph = AgreeablenessGraph()
-        agreeableness_graph.show(Zone.ZONES)
+    agreeableness_graph = AgreeablenessGraph()
+    agreeableness_graph.show(Zone.ZONES)
 
 if __name__ == '__main__':
     main()
