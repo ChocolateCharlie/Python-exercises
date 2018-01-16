@@ -7,3 +7,6 @@ These exercises are issued from the following Openclassrooms courses :
 
 	- Démarrez votre projet avec Python, by Céline Martinet Sanchez
 	https://openclassrooms.com/courses/demarrez-votre-projet-avec-python
+	
+	- Découvrez la programmation orientée objet avec Python, by Céline Martinet Sanchez
+	https://openclassrooms.com/courses/decouvrez-la-programmation-orientee-objet-avec-python
