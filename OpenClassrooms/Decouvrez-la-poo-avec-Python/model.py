@@ -9,6 +9,7 @@ import math
 class Zone:
     
     # Attributes
+    EARTH_RADIUS_KILOMETERS = 6371
     # Grid size values
     MIN_LATITUDE_DEGREES = -90
     MAX_LATITUDE_DEGREES = 90
@@ -31,9 +32,24 @@ class Zone:
     def population(self):
         return len(self.inhabitants)
 
+    # The width of a zone
+    @property
+    def width(self):
+        return abs(self.corner1.longitude - self.corner2.longitude) * self.EARTH_RADIUS_KILOMETERS
+
+    # The height of a zone
+    @property
+    def height(self):
+        return abs(self.corner1.latitude - self.corner2.latitude) * self.EARTH_RADIUS_KILOMETERS
+
+    # The area of a zone
+    @property
+    def area(self):
+        return self.height * self.width
+
     # Initialize the list of zones
     @classmethod
-    def initialize_zones(cls):
+    def _initialize_zones(cls):
         for latitude in range(cls.MIN_LATITUDE_DEGREES, cls.MAX_LATITUDE_DEGREES, cls.HEIGHT_DEGREES):
             for longitude in range(cls.MIN_LONGITUDE_DEGREES, cls.MAX_LONGITUDE_DEGREES, cls.WIDTH_DEGREES):
                 bottom_left_corner = Position(longitude, latitude)
@@ -44,6 +60,8 @@ class Zone:
     # Compute the index of the ZONES array that contains a given position
     @classmethod
     def find_zone_that_contains(cls, position):
+        if not cls.ZONES:
+            cls._initialize_zones()
         longitude_index = int((position.longitude_degrees - cls.MIN_LONGITUDE_DEGREES) / cls.WIDTH_DEGREES)
         latitude_index = int((position.latitude_degrees - cls.MIN_LATITUDE_DEGREES) / cls.HEIGHT_DEGREES)
         longitude_bins = int((cls.MAX_LONGITUDE_DEGREES - cls.MIN_LONGITUDE_DEGREES) / cls.WIDTH_DEGREES)
@@ -63,6 +81,17 @@ class Zone:
     # Add an inhabitant to the zone
     def add_inhabitant(self, inhabitant):
         self.inhabitants.append(inhabitant)
+
+    # Calculate the density of population of the zone
+    def population_density(self):
+        # WARNING : if self.area == 0 then an error will occur
+        return self.population / self.area
+
+    # Calculate the average agreeableness of the zone
+    def average_agreeableness(self):
+        if not self.inhabitants:
+            return 0
+        return sum([inhabitant.agreeableness for inhabitant in self.inhabitants]) / self.population
 
 
 
@@ -102,7 +131,6 @@ class Agent:
 ##### LOGIC #####
 
 def main():
-    Zone.initialize_zones()
     for agent_attributes in json.load(open("agents-100k.json")):
         latitude = agent_attributes.pop("latitude")
         longitude = agent_attributes.pop("longitude")
@@ -110,7 +138,7 @@ def main():
         agent = Agent(position, **agent_attributes)
         zone = Zone.find_zone_that_contains(position)
         zone.add_inhabitant(agent)
-        print("Zone population: ", zone.population)
+        print( zone.average_agreeableness())
 
 if __name__ == '__main__':
     main()
