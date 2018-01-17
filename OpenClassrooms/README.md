@@ -10,3 +10,6 @@ These exercises are issued from the following Openclassrooms courses :
 	
 	- Découvrez la programmation orientée objet avec Python, by Céline Martinet Sanchez
 	https://openclassrooms.com/courses/decouvrez-la-programmation-orientee-objet-avec-python
+
+	- Découvrez le fonctionnement des algorithmes, by Céline Martinet Sanchez
+	https://openclassrooms.com/courses/decouvrez-le-fonctionnement-des-algorithmes
