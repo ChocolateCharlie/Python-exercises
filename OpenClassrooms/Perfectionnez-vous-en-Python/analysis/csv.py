@@ -10,7 +10,7 @@ def launch_analysis(data_file):
     path_to_file = path.join(directory, "data", data_file)
     with open(path_to_file, "r") as f:
         preview = f.readline()
-    print("We managed to read the file ! Here is the preview: {}".format(preview))
+        print("We managed to read the file ! Here is the preview: {}".format(preview))
 
 
 
