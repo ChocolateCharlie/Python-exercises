@@ -22,7 +22,28 @@ class SetOfParliamentMembers:
 
     # Show circulat diagramm
     def display_chart(self):
-        pass
+        # Get the data
+        data = self.dataframe
+        female_mps = data[data.sexe == "F"]
+        male_mps = data[data.sexe == "H"]
+        # Do the proportions (will be diplayed in pie chart)
+        counts = [len(female_mps), len(male_mps)]
+        counts = np.array(counts)
+        nb_mps=counts.sum()
+        proportions=counts/nb_mps
+        # Create labels
+        labels = ["Female ({})".format(counts[0]), "Male({})".format(counts[1])]
+        # Draw pie chart
+        fig, ax = plt.subplots()
+        ax.axis("equal")
+        ax.pie(
+                proportions,
+                labels=labels,
+                autopct="%1.1f pourcents"
+                )
+        plt.title("{} ({} MPs".format(self.name, nb_mps))
+        plt.show()
+
 
     def split_by_political_party(self):
         result = {}
