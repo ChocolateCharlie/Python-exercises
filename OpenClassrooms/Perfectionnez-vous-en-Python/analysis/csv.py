@@ -1,12 +1,14 @@
-#! /usr/bin/env python3
+#! usr/bin/env python3
 # coding: utf-8
 
 from os import path
+import logging as lg
+
 import pandas as pd
 
 
 
-class SetOfParliamentMembers:
+class SetOfParliamentMember:
 
     # Constructor
     def __init__(self, name):
@@ -39,9 +41,9 @@ class SetOfParliamentMembers:
         ax.pie(
                 proportions,
                 labels=labels,
-                autopct="%1.1f pourcents"
+                autopct="%1.1f%%"
                 )
-        plt.title("{} ({} MPs".format(self.name, nb_mps))
+        plt.title("{} ({} MPs)".format(self.name, nb_mps))
         plt.show()
 
 
@@ -51,20 +53,28 @@ class SetOfParliamentMembers:
         all_parties = data["parti_ratt_financier"].dropna().unique()
         for party in all_parties:
             data_subset = data[data.parti_ratt_financier == party]
-            subset = SetOfParliamentMembers('MPs from party "{}"'.format(party))
+            subset = SetOfParliamentMember('MPs from party "{}"'.format(party))
             subset.data_from_dataframe(data_subset)
             result[party] = subset
         return result
 
+    def total_mps(self):
+        return len(self.dataframe)
+
+    def __repr__(self):
+        return "SetOfParliamentMember: {} members".format(len(self.dataframe))
+
 
 
 def launch_analysis(data_file, by_party = False):
-    sopm = SetOfParliamentMembers("All MPs")
-    sopm.data_from_csv(path.join(directory, "data", data_file))
+    sopm = SetOfParliamentMember("All MPs")
+    sopm.data_from_csv(path.join("data", data_file))
     sopm.display_chart()
     if by_party:
         for party, s in sopm.split_by_political_party().items():
             s.diplay_chart()
+    if info:
+        print(repr(sopm))
 
 
 
